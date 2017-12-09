@@ -1,0 +1,65 @@
+{% extends "burrito/base.html" %}
+
+{%block search%}
+{% include "burrito/search_form.html" %}<br/>
+{%endblock%}
+{%block content%}
+{% if not request.GET.q %}
+<div class="">
+  {%include "burrito/form.html" with form=create_form action_url=create_url btn_title='Burritos'%}<br/>
+  <!-- <p class="image is-32x32">
+    <img src="http://bulma.io/images/placeholders/128x128.png">
+  </p> -->
+</div>
+{% endif %}
+
+{% for object in object_list %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"></div>
+        <div class="panel-body"><img src="https://placehold.it/150x80?text=burrito.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+        <h4>{{object}}</h4>
+        <a href="/burritoss/detail/{{object.id}}/">View</a> {{object.created|timesince}} {{object.user}}&nbsp;   <a href="/burritoss/detail/{{object.id}}/edit">Edit</a>  <a href="/burritoss/detail/{{object.id}}/delete">Delete</a>
+      </div>
+    </div><br><br/>
+
+    
+
+
+
+<!-- <span class="pull-right has-text-grey-light"><i class="fa fa-comments"></i> 1</span>
+<div class="media">
+
+  <div class="media-left"> -->
+
+    <!-- <p class="image is-32x32">
+      <img src="http://bulma.io/images/placeholders/128x128.png">
+    </p> -->
+  </div>
+
+  <div class="media-content">
+    <div class="content">
+      <p>
+
+        <!-- <a href="/burritoss/detail/{{object.id}}/">View</a> {{object.created|timesince}} {{object.user}}&nbsp;   <a href="/burritoss/detail/{{object.id}}/edit">Edit</a>  <a href="/burritoss/detail/{{object.id}}/delete">Delete</a> -->
+
+        <!-- <span class="tag">Question</span> -->
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+</article>
+{%empty%}
+{% if request.GET.q %}
+  <p>No Burritos found.</p>
+  {% else %}
+  <p>No Burritos yet.</p>
+{% endif %}
+{% endfor %}
+{% endblock %}
